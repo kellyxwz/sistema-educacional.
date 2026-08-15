@@ -27,14 +27,14 @@ public class TurmaService {
         return new TurmaResponseDTO(turma);
     }
 
-    public TurmaResponseDTO create (TurmaRequestDTO requestDTO){
+    public TurmaResponseDTO create(TurmaRequestDTO requestDTO){
         Turma turma = toEntity(requestDTO);
         Turma newTurma = turmaRespository.save(turma);
 
         return new TurmaResponseDTO(newTurma);
     }
 
-    public void delete(String id){
+    public void deleteById(String id){
         turmaRespository.deleteById(id);
     }
 

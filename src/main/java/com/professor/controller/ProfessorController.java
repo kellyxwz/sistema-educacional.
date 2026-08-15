@@ -45,7 +45,7 @@ public class ProfessorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProfessorResponseDTO> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable String id){
         professorService.findById(id);
         return ResponseEntity.noContent().build();
     }
