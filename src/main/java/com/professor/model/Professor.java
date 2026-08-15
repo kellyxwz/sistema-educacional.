@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Professor {
 
     @Id
-    private Long String;
+    private String id;
 
     private String nome;
     private String especialidade;

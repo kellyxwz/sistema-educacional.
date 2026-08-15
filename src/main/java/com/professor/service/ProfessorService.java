@@ -21,6 +21,11 @@ public class ProfessorService {
         return professorRepository.findAll().stream().map(ProfessorResponseDTO:: new).toList();
     }
 
+    public ProfessorResponseDTO findById(String id){
+        Professor professor =  professorRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado com o is: "+id));
+        return new ProfessorResponseDTO(professor);
+    }
+
     public ProfessorResponseDTO create(ProfessorRequestDTO requestDTO){
         Professor professor = toEntity(requestDTO);
         Professor savedProf =professorRepository.save(professor);
