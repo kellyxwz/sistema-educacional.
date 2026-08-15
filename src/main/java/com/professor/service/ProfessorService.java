@@ -28,7 +28,7 @@ public class ProfessorService {
 
     public ProfessorResponseDTO create(ProfessorRequestDTO requestDTO){
         Professor professor = toEntity(requestDTO);
-        Professor savedProf =professorRepository.save(professor);
+        Professor savedProf = professorRepository.save(professor);
 
         return new ProfessorResponseDTO(savedProf);
     }
