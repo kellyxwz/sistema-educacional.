@@ -18,7 +18,7 @@ public class Curso {
     private String id;
 
     private String nome;
-    private  String descrição;
+    private  String descricao;
     private Integer cargaHoraria;
     private boolean ativo;
 
