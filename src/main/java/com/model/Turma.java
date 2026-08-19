@@ -1,4 +1,4 @@
-package com.professor.model;
+package com.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

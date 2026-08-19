@@ -1,6 +1,6 @@
-package com.professor.repository;
+package com.repository;
 
-import com.professor.model.Turma;
+import com.model.Turma;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface TurmaRespository extends MongoRepository<Turma, String> {

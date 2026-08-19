@@ -1,6 +1,6 @@
-package com.professor.dto.response;
+package com.dto.response;
 
-import com.professor.model.Professor;
+import com.model.Professor;
 
 public record ProfessorResponseDTO(
         String id,

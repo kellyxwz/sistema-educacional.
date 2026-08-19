@@ -1,4 +1,4 @@
-package com.professor.dto.request;
+package com.dto.request;
 
 public record PessoaRequestDTO(
         String nome,

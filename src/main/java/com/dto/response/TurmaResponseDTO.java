@@ -1,6 +1,6 @@
-package com.professor.dto.response;
+package com.dto.response;
 
-import com.professor.model.Turma;
+import com.model.Turma;
 
 public record TurmaResponseDTO(
         String id,

@@ -1,4 +1,4 @@
-package com.professor.model;
+package com.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,16 +9,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "pessoa")
-public class Pessoa {
+@NoArgsConstructor
+@Document(collection = "usuarios")
+public class Usuario {
 
     @Id
-    private String id;
+    private Long String;
 
-    private String name;
-    private Integer idade;
-    private String email;
-    boolean ativo;
+    private String username;
+    private String password;
+    private String role;
+
 }

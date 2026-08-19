@@ -1,7 +1,6 @@
-package com.professor.dto.response;
+package com.dto.response;
 
-import com.professor.dto.request.PessoaRequestDTO;
-import com.professor.model.Pessoa;
+import com.model.Pessoa;
 
 public record PessoaResponseDTO (
         String id,

@@ -1,6 +1,6 @@
-package com.professor.repository;
+package com.repository;
 
-import com.professor.model.Professor;
+import com.model.Professor;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ProfessorRepository extends MongoRepository<Professor, String> {

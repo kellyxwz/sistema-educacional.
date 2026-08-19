@@ -1,8 +1,8 @@
-package com.professor.controller;
+package com.controller;
 
-import com.professor.dto.request.TurmaRequestDTO;
-import com.professor.dto.response.TurmaResponseDTO;
-import com.professor.service.TurmaService;
+import com.dto.request.TurmaRequestDTO;
+import com.dto.response.TurmaResponseDTO;
+import com.service.TurmaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
