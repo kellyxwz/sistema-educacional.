@@ -1,9 +1,9 @@
-package com.professor.service;
+package com.service;
 
-import com.professor.dto.request.ProfessorRequestDTO;
-import com.professor.dto.response.ProfessorResponseDTO;
-import com.professor.model.Professor;
-import com.professor.repository.ProfessorRepository;
+import com.dto.request.ProfessorRequestDTO;
+import com.dto.response.ProfessorResponseDTO;
+import com.model.Professor;
+import com.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

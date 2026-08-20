@@ -1,8 +1,8 @@
-package com.professor.controller;
+package com.controller;
 
-import com.professor.dto.request.ProfessorRequestDTO;
-import com.professor.dto.response.ProfessorResponseDTO;
-import com.professor.service.ProfessorService;
+import com.dto.request.ProfessorRequestDTO;
+import com.dto.response.ProfessorResponseDTO;
+import com.service.ProfessorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

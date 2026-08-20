@@ -1,10 +1,9 @@
-package com.professor.service;
+package com.service;
 
-import com.professor.dto.request.TurmaRequestDTO;
-import com.professor.dto.response.ProfessorResponseDTO;
-import com.professor.dto.response.TurmaResponseDTO;
-import com.professor.model.Turma;
-import com.professor.repository.TurmaRespository;
+import com.dto.request.TurmaRequestDTO;
+import com.dto.response.TurmaResponseDTO;
+import com.model.Turma;
+import com.repository.TurmaRespository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +48,7 @@ public class TurmaService {
         turma.setAno(dto.ano());
     }
 
-    public Turma toEntity(TurmaRequestDTO dto){
+    public static Turma toEntity(TurmaRequestDTO dto){
 
         Turma turma = new Turma();
         turma.setNome(dto.nome());
