@@ -1,0 +1,67 @@
+package com.service;
+
+import com.dto.request.CursoRequestDTO;
+import com.dto.request.DisciplinaRequestDTO;
+import com.dto.response.CursoResponseDTO;
+
+
+import com.dto.response.DisciplinaResponseDTO;
+import com.model.Curso;
+import com.model.Disciplina;
+import com.repository.CursoRepository;
+import com.repository.DisciplinaRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class DisciplinaService {
+
+    private final DisciplinaRepository disciplinaRepository;
+
+    public DisciplinaService(DisciplinaRepository disciplinaRepository) {
+        this.disciplinaRepository = disciplinaRepository;
+    }
+
+    public List<DisciplinaResponseDTO> findAll(){
+        return disciplinaRepository.findAll().stream().map(DisciplinaResponseDTO :: new).toList();
+    }
+
+    public DisciplinaResponseDTO findById(String id){
+        Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrada com o id: " + id));
+        return new DisciplinaResponseDTO(disciplina);
+    }
+
+    public DisciplinaResponseDTO create(DisciplinaRequestDTO requestDTO){
+        Disciplina disciplina = disciplinaRepository.save(toEntity(requestDTO));
+
+        return new DisciplinaResponseDTO(disciplina);
+    }
+
+    public DisciplinaResponseDTO update(DisciplinaRequestDTO requestDTO, String id){
+        Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(()->new RuntimeException("Disciplina não encontrada"));
+
+        updateData(disciplina,requestDTO);
+
+        return new DisciplinaResponseDTO(disciplina);
+    }
+
+    public void deleteById(String id){
+        disciplinaRepository.deleteById(id);
+    }
+
+    private void updateData(Disciplina disciplina, DisciplinaRequestDTO dto){
+        disciplina.setNome(dto.nome());
+        disciplina.setCargaHoraria(dto.cargaHoraria());
+    }
+
+        public static Disciplina toEntity(DisciplinaRequestDTO dto){
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome(dto.nome());
+        disciplina.setCargaHoraria(dto.cargaHoraria());
+        disciplina.setAtivo(true);
+        return disciplina;
+    }
+
+
+}
