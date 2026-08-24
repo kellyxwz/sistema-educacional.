@@ -26,13 +26,13 @@ public class TurmaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TurmaResponseDTO> findById (@PathVariable String id){
+    public ResponseEntity<TurmaResponseDTO> findById (@PathVariable long id){
         TurmaResponseDTO turma = turmaService.findById(id);
         return ResponseEntity.ok(turma);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TurmaResponseDTO> update(@PathVariable String id, @RequestBody TurmaRequestDTO turmaRequestDTO){
+    public ResponseEntity<TurmaResponseDTO> update(@PathVariable long id, @RequestBody TurmaRequestDTO turmaRequestDTO){
         TurmaResponseDTO turma = turmaService.update(id, turmaRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(turma);
     }
@@ -44,7 +44,7 @@ public class TurmaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable String id){
+    public ResponseEntity<Void> deleteById(@PathVariable long id){
         turmaService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

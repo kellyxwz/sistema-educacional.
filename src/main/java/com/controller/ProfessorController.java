@@ -27,7 +27,7 @@ public class ProfessorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessorResponseDTO> findById(@PathVariable String id){
+    public ResponseEntity<ProfessorResponseDTO> findById(@PathVariable long id){
         ProfessorResponseDTO professorResponse = professorService.findById(id);
         return ResponseEntity.ok(professorResponse);
     }
@@ -39,13 +39,13 @@ public class ProfessorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorResponseDTO> update(@RequestBody ProfessorRequestDTO requestDTO, @PathVariable String id){
+    public ResponseEntity<ProfessorResponseDTO> update(@RequestBody ProfessorRequestDTO requestDTO, @PathVariable long id){
         ProfessorResponseDTO professor = professorService.update(id, requestDTO);
         return ResponseEntity.ok(professor);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable long id){
         professorService.findById(id);
         return ResponseEntity.noContent().build();
     }

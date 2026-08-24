@@ -27,7 +27,7 @@ public class DisciplinaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DisciplinaResponseDTO> findById(@PathVariable String id){
+    public ResponseEntity<DisciplinaResponseDTO> findById(@PathVariable long id){
         DisciplinaResponseDTO disciplina = disciplinaService.findById(id);
         return ResponseEntity.ok(disciplina);
     }
@@ -39,13 +39,13 @@ public class DisciplinaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DisciplinaResponseDTO> update(@RequestBody DisciplinaRequestDTO requestDTO, @PathVariable String id){
+    public ResponseEntity<DisciplinaResponseDTO> update(@RequestBody DisciplinaRequestDTO requestDTO, @PathVariable long id){
         DisciplinaResponseDTO disciplina = disciplinaService.update(requestDTO, id);
         return ResponseEntity.ok(disciplina);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable long id){
         disciplinaService.findById(id);
         return ResponseEntity.noContent().build();
     }
