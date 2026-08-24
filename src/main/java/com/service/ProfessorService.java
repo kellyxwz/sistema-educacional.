@@ -21,7 +21,7 @@ public class ProfessorService {
         return professorRepository.findAll().stream().map(ProfessorResponseDTO:: new).toList();
     }
 
-    public ProfessorResponseDTO findById(String id){
+    public ProfessorResponseDTO findById(long id){
         Professor professor =  professorRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado com o is: "+id));
         return new ProfessorResponseDTO(professor);
     }
@@ -33,11 +33,11 @@ public class ProfessorService {
         return new ProfessorResponseDTO(savedProf);
     }
 
-    public void delete(String id){
+    public void delete(long id){
         professorRepository.deleteById(id);
     }
 
-    public ProfessorResponseDTO update(String id, ProfessorRequestDTO requestDTO){
+    public ProfessorResponseDTO update(long id, ProfessorRequestDTO requestDTO){
         Professor professor = professorRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não existente com o id: " +id));
         updateData(professor, requestDTO);
         Professor newProfessor = professorRepository.save(professor);

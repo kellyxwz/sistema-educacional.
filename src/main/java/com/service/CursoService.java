@@ -23,7 +23,7 @@ public class CursoService {
         return cursoRepository.findAll().stream().map(CursoResponseDTO :: new).toList();
     }
 
-    public CursoResponseDTO findById(String id){
+    public CursoResponseDTO findById(long id){
         Curso curso = cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrada com o id: " + id));
         return new CursoResponseDTO(curso);
     }
@@ -34,7 +34,7 @@ public class CursoService {
         return new CursoResponseDTO(curso);
     }
 
-    public CursoResponseDTO update(CursoRequestDTO requestDTO, String id){
+    public CursoResponseDTO update(CursoRequestDTO requestDTO, long id){
         Curso curso = cursoRepository.findById(id).orElseThrow(()->new RuntimeException("curso não encontrada"));
 
         updateData(curso,requestDTO);
@@ -42,7 +42,7 @@ public class CursoService {
         return new CursoResponseDTO(curso);
     }
 
-    public void deleteById(String id){
+    public void deleteById(long id){
         cursoRepository.deleteById(id);
     }
 
