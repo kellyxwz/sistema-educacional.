@@ -1,7 +1,7 @@
 package com.repository;
 
 import com.model.Disciplina;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DisciplinaRepository extends MongoRepository<Disciplina, String> {
+public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
 }
