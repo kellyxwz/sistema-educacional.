@@ -3,7 +3,7 @@ package com.dto.response;
 import com.model.Pessoa;
 
 public record PessoaResponseDTO (
-        String id,
+        Long id,
         String name,
         Integer idade,
         String email

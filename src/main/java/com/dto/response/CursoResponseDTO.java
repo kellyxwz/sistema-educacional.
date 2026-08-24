@@ -3,7 +3,7 @@ package com.dto.response;
 import com.model.Curso;
 
 public record CursoResponseDTO(
-        String id,
+        Long id,
         String nome,
         String descricao,
         Integer cargaHoraria

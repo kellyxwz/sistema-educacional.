@@ -3,7 +3,7 @@ package com.dto.response;
 import com.model.Disciplina;
 
 public record DisciplinaResponseDTO(
-        String id,
+        Long id,
         String nome,
         Integer cargaHoraria
 ) {
