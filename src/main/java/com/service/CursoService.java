@@ -19,6 +19,7 @@ public class CursoService {
         this.cursoRepository = cursoRepository;
     }
 
+
     public List<CursoResponseDTO> findAll(){
         return cursoRepository.findAll().stream().map(CursoResponseDTO :: new).toList();
     }
