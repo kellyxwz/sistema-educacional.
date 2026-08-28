@@ -4,8 +4,14 @@ import com.dto.request.CursoRequestDTO;
 import com.dto.response.CursoResponseDTO;
 
 
+import com.dto.response.ProfessorResponseDTO;
 import com.model.Curso;
 import com.repository.CursoRepository;
+import com.repository.ProfessorRepository;
+import com.util.PaginationUtil;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +25,37 @@ public class CursoService {
         this.cursoRepository = cursoRepository;
     }
 
+    public Page<CursoResponseDTO> buscaAvancada(
+            String nome,
+            String descricao,
+            Integer cargaHoraria,
+            Boolean ativo,
+            int page,
+            int size,
+            String sortBy,
+            String direction
+    ){
+        Pageable pageable = PaginationUtil.create(page, size, sortBy, direction);
+
+        Specification<Curso> spec = Specification.unrestricted();
+
+        if(nome != null && !nome.isBlank()){
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("nome")), "%" + nome.toLowerCase() + "%"));
+        }
+        if(descricao != null && !descricao.isBlank()){
+            spec = spec.and((root, query, cb) -> cb.like(cb.lower(root.get("descricao")), "%" + descricao.toLowerCase() + "%"));
+        }
+        if(cargaHoraria != null){
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("cargaHoraria"), cargaHoraria));
+        }
+        if (ativo != null) {
+            spec = spec.and((root, query, cb) ->
+                    cb.equal(root.get("ativo"), ativo));
+        }
+
+        return cursoRepository.findAll(spec, pageable).map(CursoResponseDTO::new);
+
+    }
 
     public List<CursoResponseDTO> findAll(){
         return cursoRepository.findAll().stream().map(CursoResponseDTO :: new).toList();
