@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -27,5 +29,8 @@ public class Professor {
     private String especialidade;
     private String email;
     private boolean  active;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Disciplina> disciplinas;
 
 }

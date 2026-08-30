@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,4 +23,11 @@ public class Disciplina {
     private String nome;
     private Integer cargaHoraria;
     private boolean ativo;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    @OneToMany(mappedBy = "disciplina")
+    private List<Avalicao> avalicaos;
 }

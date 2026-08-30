@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,4 +28,14 @@ public class Pessoa {
     private Integer idade;
     private String email;
     boolean ativo;
+
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    private Turma turma;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Avalicao> avaliacoes;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Matricula> matriculas;
 }

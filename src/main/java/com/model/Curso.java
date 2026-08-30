@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,5 +25,8 @@ public class Curso {
     private  String descricao;
     private Integer cargaHoraria;
     private boolean ativo;
+
+    @OneToMany(mappedBy = "curso")
+    private List<Matricula> matriculas;
 
 }

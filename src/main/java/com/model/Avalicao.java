@@ -1,31 +1,36 @@
 package com.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "avaliacoes")
 @Entity
+@Table(name = "avaliacoes")
 public class Avalicao {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private double nota;
     private LocalDate data;
     private boolean ativo;
+
+    @ManyToOne
+    @JoinColumn(name = "pessoa_Id")
+    private Pessoa pessoa;
+
+    @ManyToOne
+    @JoinColumn(name = "disciplina_id")
+    private Disciplina disciplina;
 
 }

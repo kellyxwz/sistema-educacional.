@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,5 +27,8 @@ public class Turma {
     private String nome;
     private Integer ano;
     private boolean ativo;
+
+    @OneToMany(mappedBy = "turma")
+    private List<Pessoa> pessoas;
 
 }
