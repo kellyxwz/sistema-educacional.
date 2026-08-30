@@ -1,15 +1,10 @@
 package com.service;
 
 import com.dto.request.AvaliacaoRequestDTO;
-import com.dto.request.DisciplinaRequestDTO;
-
 
 import com.dto.response.AvaliacaoResponseDTO;
-import com.dto.response.DisciplinaResponseDTO;
 import com.model.Avalicao;
-import com.model.Disciplina;
 import com.repository.AvalicaoRepository;
-import com.repository.DisciplinaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
