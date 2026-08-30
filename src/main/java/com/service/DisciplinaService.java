@@ -28,7 +28,7 @@ public class DisciplinaService {
     }
 
     public DisciplinaResponseDTO findById(long id){
-        Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrada com o id: " + id));
+        Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new RuntimeException("Disciplina não encontrada com o id: " + id));
         return new DisciplinaResponseDTO(disciplina);
     }
 
