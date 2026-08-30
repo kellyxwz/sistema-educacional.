@@ -1,14 +1,8 @@
 package com.service;
 
-import com.dto.request.CursoRequestDTO;
 import com.dto.request.DisciplinaRequestDTO;
-import com.dto.response.CursoResponseDTO;
-
-
 import com.dto.response.DisciplinaResponseDTO;
-import com.model.Curso;
 import com.model.Disciplina;
-import com.repository.CursoRepository;
 import com.repository.DisciplinaRepository;
 import org.springframework.stereotype.Service;
 
