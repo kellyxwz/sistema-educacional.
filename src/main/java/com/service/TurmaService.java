@@ -21,7 +21,7 @@ public class TurmaService {
         return turmaRespository.findAll().stream().map(TurmaResponseDTO :: new).toList();
     }
 
-    public TurmaResponseDTO findById(String id){
+    public TurmaResponseDTO findById(long id){
         Turma turma = turmaRespository.findById(id).orElseThrow(() ->new RuntimeException( "Nenhum usuário encontrado com o id: " + id));
         return new TurmaResponseDTO(turma);
     }
@@ -33,11 +33,11 @@ public class TurmaService {
         return new TurmaResponseDTO(newTurma);
     }
 
-    public void deleteById(String id){
+    public void deleteById(long id){
         turmaRespository.deleteById(id);
     }
 
-    public TurmaResponseDTO update(String id, TurmaRequestDTO requestDTO){
+    public TurmaResponseDTO update(long id, TurmaRequestDTO requestDTO){
         Turma turma = turmaRespository.findById(id).orElseThrow(()-> new RuntimeException("Turma não encontrada com id: "+id));
         updateData(turma, requestDTO);
         return new TurmaResponseDTO(turma);

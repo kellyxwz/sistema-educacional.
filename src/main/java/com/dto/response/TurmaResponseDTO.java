@@ -3,7 +3,7 @@ package com.dto.response;
 import com.model.Turma;
 
 public record TurmaResponseDTO(
-        String id,
+        Long id,
         String nome,
         Integer ano
 ) {

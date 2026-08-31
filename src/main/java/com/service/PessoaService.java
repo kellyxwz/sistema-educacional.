@@ -22,7 +22,7 @@ public class PessoaService {
         return pessoaRepository.findAll().stream().map(PessoaResponseDTO :: new).toList();
     }
 
-    public PessoaResponseDTO findById(String id){
+    public PessoaResponseDTO findById(long id){
         Pessoa pessoa = pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada com o id: " + id));
         return new PessoaResponseDTO(pessoa);
     }
@@ -33,7 +33,7 @@ public class PessoaService {
         return new PessoaResponseDTO(pessoa);
     }
 
-    public PessoaResponseDTO update(PessoaRequestDTO requestDTO, String id){
+    public PessoaResponseDTO update(PessoaRequestDTO requestDTO, long id){
         Pessoa pessoa = pessoaRepository.findById(id).orElseThrow(()->new RuntimeException("pessoa não encontrada"));
 
         updateData(pessoa,requestDTO);
@@ -41,7 +41,7 @@ public class PessoaService {
         return new PessoaResponseDTO(pessoa);
     }
 
-    public void deleteById(String id){
+    public void deleteById(long id){
         pessoaRepository.deleteById(id);
     }
 

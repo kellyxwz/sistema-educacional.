@@ -3,11 +3,11 @@ package com.dto.response;
 import com.model.Pessoa;
 
 public record PessoaResponseDTO (
-        String id,
+        Long id,
         String name,
         Integer idade,
-        String email
-
+        String email,
+        Long turmaId
 ){
 
     public PessoaResponseDTO(Pessoa pessoa){
@@ -15,7 +15,8 @@ public record PessoaResponseDTO (
                 pessoa.getId(),
                 pessoa.getName(),
                 pessoa.getIdade(),
-                pessoa.getEmail()
+                pessoa.getEmail(),
+                pessoa.getTurma().getId()
         );
     }
 

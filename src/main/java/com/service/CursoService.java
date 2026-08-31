@@ -6,6 +6,9 @@ import com.dto.response.CursoResponseDTO;
 
 import com.model.Curso;
 import com.repository.CursoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +26,7 @@ public class CursoService {
         return cursoRepository.findAll().stream().map(CursoResponseDTO :: new).toList();
     }
 
-    public CursoResponseDTO findById(String id){
+    public CursoResponseDTO findById(long id){
         Curso curso = cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrada com o id: " + id));
         return new CursoResponseDTO(curso);
     }
@@ -34,7 +37,7 @@ public class CursoService {
         return new CursoResponseDTO(curso);
     }
 
-    public CursoResponseDTO update(CursoRequestDTO requestDTO, String id){
+    public CursoResponseDTO update(CursoRequestDTO requestDTO, long id){
         Curso curso = cursoRepository.findById(id).orElseThrow(()->new RuntimeException("curso não encontrada"));
 
         updateData(curso,requestDTO);
@@ -42,7 +45,7 @@ public class CursoService {
         return new CursoResponseDTO(curso);
     }
 
-    public void deleteById(String id){
+    public void deleteById(long id){
         cursoRepository.deleteById(id);
     }
 

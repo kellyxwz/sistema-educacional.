@@ -1,14 +1,8 @@
 package com.service;
 
-import com.dto.request.CursoRequestDTO;
 import com.dto.request.DisciplinaRequestDTO;
-import com.dto.response.CursoResponseDTO;
-
-
 import com.dto.response.DisciplinaResponseDTO;
-import com.model.Curso;
 import com.model.Disciplina;
-import com.repository.CursoRepository;
 import com.repository.DisciplinaRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +21,8 @@ public class DisciplinaService {
         return disciplinaRepository.findAll().stream().map(DisciplinaResponseDTO :: new).toList();
     }
 
-    public DisciplinaResponseDTO findById(String id){
-        Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrada com o id: " + id));
+    public DisciplinaResponseDTO findById(long id){
+        Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new RuntimeException("Disciplina não encontrada com o id: " + id));
         return new DisciplinaResponseDTO(disciplina);
     }
 
@@ -38,7 +32,7 @@ public class DisciplinaService {
         return new DisciplinaResponseDTO(disciplina);
     }
 
-    public DisciplinaResponseDTO update(DisciplinaRequestDTO requestDTO, String id){
+    public DisciplinaResponseDTO update(DisciplinaRequestDTO requestDTO, long id){
         Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(()->new RuntimeException("Disciplina não encontrada"));
 
         updateData(disciplina,requestDTO);
@@ -46,7 +40,7 @@ public class DisciplinaService {
         return new DisciplinaResponseDTO(disciplina);
     }
 
-    public void deleteById(String id){
+    public void deleteById(long id){
         disciplinaRepository.deleteById(id);
     }
 

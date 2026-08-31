@@ -1,7 +1,7 @@
 package com.repository;
 
 import com.model.Professor;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProfessorRepository extends MongoRepository<Professor, String> {
+public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 }

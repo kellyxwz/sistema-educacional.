@@ -27,7 +27,7 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PessoaResponseDTO> findById(@PathVariable String id){
+    public ResponseEntity<PessoaResponseDTO> findById(@PathVariable long id){
         PessoaResponseDTO pessoa = pessoaService.findById(id);
         return ResponseEntity.ok(pessoa);
     }
@@ -39,13 +39,13 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PessoaResponseDTO> update(@RequestBody PessoaRequestDTO requestDTO, @PathVariable String id){
+    public ResponseEntity<PessoaResponseDTO> update(@RequestBody PessoaRequestDTO requestDTO, @PathVariable long id){
         PessoaResponseDTO pessoa = pessoaService.update( requestDTO, id);
         return ResponseEntity.ok(pessoa);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public ResponseEntity<Void> delete(@PathVariable long id){
         pessoaService.findById(id);
         return ResponseEntity.noContent().build();
     }

@@ -3,7 +3,8 @@ package com.dto.request;
 public record DisciplinaRequestDTO(
 
         String nome,
-        Integer cargaHoraria
+        Integer cargaHoraria,
+        Long pessoaId
 
 ) {
 }

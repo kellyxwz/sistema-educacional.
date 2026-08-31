@@ -1,7 +1,8 @@
 package com.repository;
 
 import com.model.Curso;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface CursoRepository extends MongoRepository<Curso, String> {
+public interface CursoRepository extends JpaRepository<Curso, Long>, JpaSpecificationExecutor<Curso> {
 }
