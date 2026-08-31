@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public record AvaliacaoRequestDTO(
         double nota,
         LocalDate data,
-        Long turmaId,
+        Long disciplinaId,
         Long pesooaId
 ) {
 }
