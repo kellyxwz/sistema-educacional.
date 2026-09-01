@@ -2,13 +2,17 @@ package com.controller;
 
 import com.dto.request.AvaliacaoRequestDTO;
 import com.dto.response.AvaliacaoResponseDTO;
+import com.dto.response.TurmaResponseDTO;
 import com.service.AvaliacaoService;
 
 
+import lombok.Builder;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController

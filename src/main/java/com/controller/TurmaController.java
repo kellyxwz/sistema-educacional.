@@ -3,10 +3,12 @@ package com.controller;
 import com.dto.request.TurmaRequestDTO;
 import com.dto.response.TurmaResponseDTO;
 import com.service.TurmaService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,16 @@ public class TurmaController {
 
     public TurmaController(TurmaService turmaService) {
         this.turmaService = turmaService;
+    }
+
+    @GetMapping("/busca")
+    public Page<TurmaResponseDTO> buscaAvancada(@RequestParam(defaultValue = "0")int page,
+                                                @RequestParam(defaultValue = "10")int size,
+                                                @RequestParam(defaultValue = "id")String sortBy,
+                                                @RequestParam(defaultValue = "asc") String direction,
+                                                @RequestParam(required = false) String nome,
+                                                @RequestParam(required = false) LocalDate data){
+        return turmaService.buscaAvancada(page, size, sortBy, direction, nome, data);
     }
 
     @GetMapping
