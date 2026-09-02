@@ -28,12 +28,19 @@ public class CursoService {
                                                 int size,
                                                 String sortBy,
                                                 String direction,
+                                                String nome,
                                                 String descricao,
                                                 Integer cargaHoraria){
 
         Pageable pageable = Pagination.create(page, size, sortBy, direction);
 
         Specification<Curso> spec = Specification.unrestricted();
+
+
+        if (nome != null) {
+            spec = spec.and((root, query, cb) ->
+                    cb.like(root.get("nome"), "%" + nome + "%"));
+        }
 
         if(descricao!=null) {
             spec = spec.and((root, query, cb) ->
