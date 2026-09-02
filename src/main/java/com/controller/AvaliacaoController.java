@@ -25,6 +25,17 @@ public class AvaliacaoController {
         this.avaliacaoService = avaliacaoService;
     }
 
+    @GetMapping("/busca")
+    public Page<AvaliacaoResponseDTO> buscaAvancada(@RequestParam(defaultValue = "0")int page,
+                                                    @RequestParam(defaultValue = "5")int size,
+                                                    @RequestParam(defaultValue = "id") String sortBy,
+                                                    @RequestParam(defaultValue = "asc") String direction,
+                                                    @RequestParam(required = false) Double nota,
+                                                    @RequestParam(required = false) LocalDate data){
+
+        return avaliacaoService.buscaAvancada(page, size, sortBy, direction, nota, data);
+    }
+
     @GetMapping
     public ResponseEntity<List<AvaliacaoResponseDTO>> findAll(){
         List<AvaliacaoResponseDTO> list = avaliacaoService.findAll();
