@@ -2,13 +2,17 @@ package com.controller;
 
 import com.dto.request.AvaliacaoRequestDTO;
 import com.dto.response.AvaliacaoResponseDTO;
+import com.dto.response.TurmaResponseDTO;
 import com.service.AvaliacaoService;
 
 
+import lombok.Builder;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,6 +23,17 @@ public class AvaliacaoController {
 
     public AvaliacaoController(AvaliacaoService avaliacaoService) {
         this.avaliacaoService = avaliacaoService;
+    }
+
+    @GetMapping("/busca")
+    public Page<AvaliacaoResponseDTO> buscaAvancada(@RequestParam(defaultValue = "0")int page,
+                                                    @RequestParam(defaultValue = "5")int size,
+                                                    @RequestParam(defaultValue = "id") String sortBy,
+                                                    @RequestParam(defaultValue = "asc") String direction,
+                                                    @RequestParam(required = false) Double nota,
+                                                    @RequestParam(required = false) LocalDate data){
+
+        return avaliacaoService.buscaAvancada(page, size, sortBy, direction, nota, data);
     }
 
     @GetMapping
