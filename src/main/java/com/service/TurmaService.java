@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,7 +26,7 @@ public class TurmaService {
                                                  String sortBy,
                                                  String direction,
                                                  String nome,
-                                                 LocalDate data){
+                                                 Integer ano){
 
         Pageable pageable = Pagination.create(page, size, sortBy, direction);
 
@@ -42,9 +41,9 @@ public class TurmaService {
             );
         }
 
-        if (data != null) {
+        if (ano != null) {
             spec = spec.and((root, query, cb) ->
-                    cb.equal(root.get("data"), data)
+                    cb.equal(root.get("data"), ano)
             );
         }
 

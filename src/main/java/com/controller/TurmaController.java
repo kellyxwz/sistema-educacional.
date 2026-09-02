@@ -23,12 +23,12 @@ public class TurmaController {
 
     @GetMapping("/busca")
     public Page<TurmaResponseDTO> buscaAvancada(@RequestParam(defaultValue = "0")int page,
-                                                @RequestParam(defaultValue = "10")int size,
+                                                @RequestParam(defaultValue = "5")int size,
                                                 @RequestParam(defaultValue = "id")String sortBy,
                                                 @RequestParam(defaultValue = "asc") String direction,
                                                 @RequestParam(required = false) String nome,
-                                                @RequestParam(required = false) LocalDate data){
-        return turmaService.buscaAvancada(page, size, sortBy, direction, nome, data);
+                                                @RequestParam(required = false) Integer ano){
+        return turmaService.buscaAvancada(page, size, sortBy, direction, nome, ano);
     }
 
     @GetMapping

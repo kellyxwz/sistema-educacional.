@@ -5,11 +5,16 @@ import com.dto.response.AvaliacaoResponseDTO;
 import com.model.Avalicao;
 import com.model.Disciplina;
 import com.model.Pessoa;
+import com.pagination.Pagination;
 import com.repository.AvalicaoRepository;
 import com.repository.DisciplinaRepository;
 import com.repository.PessoaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,6 +28,31 @@ public class AvaliacaoService {
         this.avalicaoRepository = avalicaoRepository;
         this.pessoaRepository = pessoaRepository;
         this.disciplinaRepository = disciplinaRepository;
+    }
+
+    public Page<AvaliacaoResponseDTO> buscaAvancada(int page,
+                                                    int size,
+                                                    String sortBy,
+                                                    String direction,
+                                                    Double nota,
+                                                    LocalDate data
+                                                    ){
+
+        Pageable pageable = Pagination.create(page, size, sortBy, direction);
+
+        Specification<Avalicao> spec = Specification.unrestricted();
+
+        if (nota!=null){
+            spec = spec.and(((root, query, cb) ->
+                    cb.equal(root.get("nota"), nota) ));
+        };
+
+        if (data!=null){
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("data"), data));
+        }
+
+        return avalicaoRepository.findAll(spec, pageable).map(AvaliacaoResponseDTO::new);
+
     }
 
     public List<AvaliacaoResponseDTO> findAll(){
