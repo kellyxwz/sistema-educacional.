@@ -3,9 +3,14 @@ package com.service;
 import com.dto.request.MatriculaRequestDTO;
 import com.dto.response.MatriculaResponseDTO;
 import com.model.Matricula;
+import com.pagination.Pagination;
 import com.repository.MatriculaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -15,6 +20,22 @@ public class MatriculaService {
 
     public MatriculaService(MatriculaRepository matriculaRepository) {
         this.matriculaRepository = matriculaRepository;
+    }
+
+    public Page<Matricula> buscaAvancada(int page,
+                                         int size,
+                                         String sortBy,
+                                         String direction,
+                                         LocalDate dataMatricula){
+
+        Pageable pageable = Pagination.create(page, size, sortBy, direction);
+
+        Specification<Matricula> spec = Specification.unrestricted();
+
+        if (dataMatricula != null){
+            spec = spec.and((root, query, cb) ->
+                    cb.equal(root.get("dataMatricula"), dataMatricula));
+        }
     }
 
     public List<MatriculaResponseDTO> findAll(){
