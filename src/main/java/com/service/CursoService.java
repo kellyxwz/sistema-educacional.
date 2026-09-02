@@ -5,11 +5,13 @@ import com.dto.response.CursoResponseDTO;
 
 
 import com.model.Curso;
+import com.pagination.Pagination;
 import com.repository.CursoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,6 +22,31 @@ public class CursoService {
 
     public CursoService(CursoRepository cursoRepository) {
         this.cursoRepository = cursoRepository;
+    }
+
+    public Page<CursoResponseDTO> buscaAvancada(int page,
+                                                int size,
+                                                String sortBy,
+                                                String direction,
+                                                String descricao,
+                                                Integer cargaHoraria){
+
+        Pageable pageable = Pagination.create(page, size, sortBy, direction);
+
+        Specification<Curso> spec = Specification.unrestricted();
+
+        if(descricao!=null) {
+            spec = spec.and((root, query, cb) ->
+                    cb.like(root.get("descricao"), "%" + descricao + "%"));
+        }
+
+        if(cargaHoraria !=null){
+            spec = spec.and((root, query, cb) ->
+                    cb.equal(root.get("cargaHoraria"), cargaHoraria));
+        }
+
+        return cursoRepository.findAll(spec, pageable).map(CursoResponseDTO :: new);
+
     }
 
     public List<CursoResponseDTO> findAll(){
