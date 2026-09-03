@@ -22,7 +22,7 @@ public class MatriculaService {
         this.matriculaRepository = matriculaRepository;
     }
 
-    public Page<Matricula> buscaAvancada(int page,
+    public Page<MatriculaResponseDTO> buscaAvancada(int page,
                                          int size,
                                          String sortBy,
                                          String direction,
@@ -36,6 +36,8 @@ public class MatriculaService {
             spec = spec.and((root, query, cb) ->
                     cb.equal(root.get("dataMatricula"), dataMatricula));
         }
+
+        return matriculaRepository.findAll(spec, pageable).map(MatriculaResponseDTO::new);
     }
 
     public List<MatriculaResponseDTO> findAll(){
