@@ -29,6 +29,7 @@ public class ProfessorService {
                                                     String nome,
                                                     String especialidade,
                                                     String email){
+
         Pageable pageable = Pagination.create(page, size, sortBy, direction);
 
         Specification<Professor> spec = Specification.unrestricted();
