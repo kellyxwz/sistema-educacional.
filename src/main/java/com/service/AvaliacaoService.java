@@ -67,7 +67,7 @@ public class AvaliacaoService {
     public AvaliacaoResponseDTO create(AvaliacaoRequestDTO requestDTO){
         Avalicao avalicao = avalicaoRepository.save(toEntity(requestDTO));
 
-        Pessoa pessoa = pessoaRepository.findById(requestDTO.pesooaId()).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
+        Pessoa pessoa = pessoaRepository.findById(requestDTO.pessoaId()).orElseThrow(() -> new RuntimeException("Pessoa não encontrada"));
         Disciplina disciplina = disciplinaRepository.findById(requestDTO.disciplinaId()).orElseThrow(()-> new RuntimeException("Disciplina não encontrada"));
         avalicao.setPessoa(pessoa);
         avalicao.setDisciplina(disciplina);
