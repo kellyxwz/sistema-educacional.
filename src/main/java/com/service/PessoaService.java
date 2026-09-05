@@ -4,7 +4,11 @@ import com.dto.request.PessoaRequestDTO;
 import com.dto.response.PessoaResponseDTO;
 
 import com.model.Pessoa;
+import com.pagination.Pagination;
 import com.repository.PessoaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +20,38 @@ public class PessoaService {
 
     public PessoaService(PessoaRepository pessoaRepository) {
         this.pessoaRepository = pessoaRepository;
+    }
+
+
+    public Page<PessoaResponseDTO> buscaAvancada(int page,
+                                                 int size,
+                                                 String sortBy,
+                                                 String direction,
+                                                 String name,
+                                                 Integer idade,
+                                                 String email){
+
+        Pageable pageable = Pagination.create(page, size, sortBy, direction);
+
+        Specification<Pessoa> spec = Specification.unrestricted();
+
+        if (name != null){
+            spec = spec.and((root, query, cb) ->
+                    cb.like(root.get("name"), "%" + name + "%"));
+        }
+
+        if (name != null){
+            spec = spec.and((root, query, cb) ->
+                    cb.equal(root.get("idade"), idade));
+        }
+
+        if (name != null){
+            spec = spec.and((root, query, cb) ->
+                    cb.like(root.get("email"), "%" + email + "%"));
+        }
+
+        return pessoaRepository.findAll(spec, pageable).map(PessoaResponseDTO::new);
+
     }
 
     public List<PessoaResponseDTO> findAll(){

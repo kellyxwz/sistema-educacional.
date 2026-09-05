@@ -6,6 +6,6 @@ public record AvaliacaoRequestDTO(
         double nota,
         LocalDate data,
         Long disciplinaId,
-        Long pesooaId
+        Long pessoaId
 ) {
 }

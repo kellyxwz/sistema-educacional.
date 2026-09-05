@@ -6,6 +6,7 @@ import com.dto.response.CursoResponseDTO;
 
 import com.service.CursoService;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,17 @@ public class CursoController {
         List<CursoResponseDTO> list = cursoService.findAll();
 
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/busca")
+    public Page<CursoResponseDTO> buscaAvancada(@RequestParam(defaultValue = "0")int page,
+                                                @RequestParam(defaultValue = "5")int size,
+                                                @RequestParam(defaultValue = "id")String sortBy,
+                                                @RequestParam(defaultValue = "asc")String direction,
+                                                @RequestParam(required = false)String nome,
+                                                @RequestParam(required = false)String descricao,
+                                                @RequestParam(required = false)Integer cargaHoraria){
+        return cursoService.buscaAvancada(page, size, sortBy, direction, nome, descricao, cargaHoraria);
     }
 
     @GetMapping("/{id}")

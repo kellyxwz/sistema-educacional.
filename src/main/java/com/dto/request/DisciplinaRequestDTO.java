@@ -4,7 +4,7 @@ public record DisciplinaRequestDTO(
 
         String nome,
         Integer cargaHoraria,
-        Long pessoaId
+        Long professorId
 
 ) {
 }
