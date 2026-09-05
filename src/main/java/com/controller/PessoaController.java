@@ -1,12 +1,15 @@
 package com.controller;
 
 import com.dto.request.PessoaRequestDTO;
+import com.dto.response.MatriculaResponseDTO;
 import com.dto.response.PessoaResponseDTO;
 import com.service.PessoaService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,18 @@ public class PessoaController {
         List<PessoaResponseDTO> list = pessoaService.findAll();
 
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/busca")
+    public Page<PessoaResponseDTO> buscaAvancada(@RequestParam(defaultValue = "0")int page,
+                                                    @RequestParam(defaultValue = "5")int size,
+                                                    @RequestParam(defaultValue = "id")String sortBy,
+                                                    @RequestParam(defaultValue = "asc")String direction,
+                                                    @RequestParam(required = false) String name,
+                                                    @RequestParam(required = false)Integer idade,
+                                                    @RequestParam(required = false)String email){
+
+        return pessoaService.buscaAvancada(page, size, sortBy, direction, name, idade, email);
     }
 
     @GetMapping("/{id}")
