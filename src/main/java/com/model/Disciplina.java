@@ -29,5 +29,5 @@ public class Disciplina {
     private Professor professor;
 
     @OneToMany(mappedBy = "disciplina")
-    private List<Avalicao> avalicaos;
+    private List<Avaliacao> avaliacaos;
 }

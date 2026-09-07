@@ -1,8 +1,8 @@
 package com.repository;
 
-import com.model.Avalicao;
+import com.model.Avaliacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface AvalicaoRepository extends JpaRepository<Avalicao, Long>, JpaSpecificationExecutor<Avalicao> {
+public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long>, JpaSpecificationExecutor<Avaliacao> {
 }

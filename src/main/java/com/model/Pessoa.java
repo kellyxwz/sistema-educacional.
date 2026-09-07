@@ -34,7 +34,7 @@ public class Pessoa {
     private Turma turma;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<Avalicao> avaliacoes;
+    private List<Avaliacao> avaliacoes;
 
     @OneToMany(mappedBy = "pessoa")
     private List<Matricula> matriculas;

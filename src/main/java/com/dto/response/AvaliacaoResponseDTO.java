@@ -1,10 +1,7 @@
 package com.dto.response;
 
-import com.model.Avalicao;
-import com.model.Disciplina;
-import com.model.Pessoa;
+import com.model.Avaliacao;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 public record AvaliacaoResponseDTO(
@@ -15,7 +12,7 @@ public record AvaliacaoResponseDTO(
         Long pesooaId
 ) {
 
-    public AvaliacaoResponseDTO(Avalicao avaliacao){
+    public AvaliacaoResponseDTO(Avaliacao avaliacao){
         this(
                 avaliacao.getId(),
                 avaliacao.getNota(),
