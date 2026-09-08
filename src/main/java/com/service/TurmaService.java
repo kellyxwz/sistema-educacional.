@@ -4,7 +4,7 @@ import com.dto.request.TurmaRequestDTO;
 import com.dto.response.TurmaResponseDTO;
 import com.model.Turma;
 import com.pagination.Pagination;
-import com.repository.TurmaRespository;
+import com.repository.TurmaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,10 +15,10 @@ import java.util.List;
 @Service
 public class TurmaService {
 
-    private final TurmaRespository turmaRespository;
+    private final TurmaRepository turmaRepository;
 
-    public TurmaService(TurmaRespository turmaRespository) {
-        this.turmaRespository = turmaRespository;
+    public TurmaService(TurmaRepository turmaRepository) {
+        this.turmaRepository = turmaRepository;
     }
 
     public Page<TurmaResponseDTO> buscaAvancada (int page,
@@ -47,32 +47,32 @@ public class TurmaService {
             );
         }
 
-        return turmaRespository.findAll(spec, pageable).map(TurmaResponseDTO::new);
+        return turmaRepository.findAll(spec, pageable).map(TurmaResponseDTO::new);
     }
 
 
     public List<TurmaResponseDTO> findAll(){
-        return turmaRespository.findAll().stream().map(TurmaResponseDTO :: new).toList();
+        return turmaRepository.findAll().stream().map(TurmaResponseDTO :: new).toList();
     }
 
     public TurmaResponseDTO findById(long id){
-        Turma turma = turmaRespository.findById(id).orElseThrow(() ->new RuntimeException( "Nenhum usuário encontrado com o id: " + id));
+        Turma turma = turmaRepository.findById(id).orElseThrow(() ->new RuntimeException( "Nenhum usuário encontrado com o id: " + id));
         return new TurmaResponseDTO(turma);
     }
 
     public TurmaResponseDTO create(TurmaRequestDTO requestDTO){
         Turma turma = toEntity(requestDTO);
-        Turma newTurma = turmaRespository.save(turma);
+        Turma newTurma = turmaRepository.save(turma);
 
         return new TurmaResponseDTO(newTurma);
     }
 
     public void deleteById(long id){
-        turmaRespository.deleteById(id);
+        turmaRepository.deleteById(id);
     }
 
     public TurmaResponseDTO update(long id, TurmaRequestDTO requestDTO){
-        Turma turma = turmaRespository.findById(id).orElseThrow(()-> new RuntimeException("Turma não encontrada com id: "+id));
+        Turma turma = turmaRepository.findById(id).orElseThrow(()-> new RuntimeException("Turma não encontrada com id: "+id));
         updateData(turma, requestDTO);
         return new TurmaResponseDTO(turma);
     }

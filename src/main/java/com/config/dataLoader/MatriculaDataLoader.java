@@ -1,17 +1,16 @@
 package com.config.dataLoader;
 
 import com.github.javafaker.Faker;
-import com.model.Avaliacao;
-import com.model.Disciplina;
+import com.model.Curso;
+import com.model.Matricula;
 import com.model.Pessoa;
-import com.repository.AvaliacaoRepository;
-import com.repository.DisciplinaRepository;
+import com.repository.CursoRepository;
+import com.repository.MatriculaRepository;
 import com.repository.PessoaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-
 
 import java.time.ZoneId;
 import java.util.List;
@@ -19,26 +18,25 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
-public class AvaliacaoDataLoader {
+public class MatriculaDataLoader {
 
     @Bean
-    @Order(7)
-    CommandLineRunner initAvaliacao(
-            AvaliacaoRepository avaliacaoRepository,
+    @Order(6)
+    CommandLineRunner initMatricula(
+            MatriculaRepository matriculaRepository,
             PessoaRepository pessoaRepository,
-            DisciplinaRepository disciplinaRepository) {
+            CursoRepository cursoRepository) {
 
         return args -> {
 
-            if (avaliacaoRepository.count() == 0) {
+            if (matriculaRepository.count() == 0) {
 
                 Faker faker = new Faker(
                         Locale.forLanguageTag("pt-BR")
                 );
 
                 List<Pessoa> pessoas = pessoaRepository.findAll();
-                List<Disciplina> disciplinas =
-                        disciplinaRepository.findAll();
+                List<Curso> cursos = cursoRepository.findAll();
 
                 if (pessoas.isEmpty()) {
                     throw new IllegalStateException(
@@ -46,25 +44,17 @@ public class AvaliacaoDataLoader {
                     );
                 }
 
-                if (disciplinas.isEmpty()) {
+                if (cursos.isEmpty()) {
                     throw new IllegalStateException(
-                            "Não existem disciplinas cadastradas."
+                            "Não existem cursos cadastrados."
                     );
                 }
 
-                for (int i = 0; i < 1000; i++) {
+                for (int i = 0; i < 500; i++) {
 
-                    Avaliacao avaliacao = new Avaliacao();
+                    Matricula matricula = new Matricula();
 
-                    avaliacao.setNota(
-                            faker.number().randomDouble(
-                                    1,
-                                    0,
-                                    10
-                            )
-                    );
-
-                    avaliacao.setData(
+                    matricula.setDataMatricula(
                             faker.date()
                                     .past(365, TimeUnit.DAYS)
                                     .toInstant()
@@ -72,7 +62,7 @@ public class AvaliacaoDataLoader {
                                     .toLocalDate()
                     );
 
-                    avaliacao.setAtivo(
+                    matricula.setAtivo(
                             faker.bool().bool()
                     );
 
@@ -83,29 +73,30 @@ public class AvaliacaoDataLoader {
                             )
                     );
 
-                    Disciplina disciplina = disciplinas.get(
+                    Curso curso = cursos.get(
                             faker.number().numberBetween(
                                     0,
-                                    disciplinas.size()
+                                    cursos.size()
                             )
                     );
 
-                    avaliacao.setPessoa(pessoa);
-                    avaliacao.setDisciplina(disciplina);
+                    matricula.setPessoa(pessoa);
+                    matricula.setCurso(curso);
 
-                    avaliacaoRepository.save(avaliacao);
+                    matriculaRepository.save(matricula);
                 }
 
                 System.out.println(
-                        "✅ Banco de avaliações populado com 1000 registros!"
+                        "✅ Banco de matrículas populado com 500 registros!"
                 );
 
             } else {
 
                 System.out.println(
-                        "ℹ️ Banco de avaliações já contém dados, não foi necessário repopular."
+                        "ℹ️ Banco de matrículas já contém dados, não foi necessário repopular."
                 );
             }
         };
     }
+
 }
